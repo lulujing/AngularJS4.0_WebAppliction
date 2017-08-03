@@ -17,7 +17,7 @@ This project I use Window system, So I downloaded Window Installer
  1.nodeJS command<br>
  <code>npm install jquery --save</code><br>
  2.add reference into angularJs-cli.json file<br>
- <image>
+ <img src="images/thirdpart.png"  width="1024"/>
  2.Typescript of Jquery<br>
  <code>npm install @types/jquery --save--dev</code><br>
  
