@@ -57,6 +57,6 @@ In app.component file, defining the method"toProductDetail( )" like <br>
 
   toProductDetail( ) { <br>
     this.router.navigate(['/product']);<br>
-  } </code>
-
+  } </code><br>
+  <a href="#">All code can be seen in example 1</a>
 
