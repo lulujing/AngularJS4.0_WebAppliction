@@ -145,9 +145,7 @@ In app.router.module file<br>
 <p>change seller component:</P>
 seller component ts:
 <code>< export class SellerInfoComponent implements OnInit {</code>
-  <code>private sellerId: number;</code>
-
- <code> constructor(private routeInfo: ActivatedRoute) { }</code>
+  <code>private sellerId: number;</code> <code> constructor(private routeInfo: ActivatedRoute) { }</code>
 
  <code> ngOnInit() {</code>
  <code> this.sellerId = this.routeInfo.snapshot.params['id'] }</code>
@@ -172,7 +170,7 @@ In app.router.module file:
 <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code>
 
 
-<h2>Auxiliary Route <a href="https://github.com/lulujing/AngularJS4.0_WebAppliction/tree/master/2.Router/Example4"></a>Example 4</h2>
+<h2>Auxiliary Route <a href="https://github.com/lulujing/AngularJS4.0_WebAppliction/tree/master/2.Router/Example4">Example 4</a></h2>
 <p>Rule:</p>
 
 <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code><br>
