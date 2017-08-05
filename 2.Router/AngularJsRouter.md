@@ -67,7 +67,8 @@ In app.component file, defining the method"toProductDetail( )" like <br>
  </li> 
  <li> Router configuration <code> {path:/product, component:ProductComponent,data[{isProd:true}]} => ActivedRoute.data[0][isProd]</code>
  </li>
- </ul>
+
+</ul>
  <i>1.routerLink</i>
  Wrote code in app.component.html
  <code><a [routerLink]="['/product']" [querryParams]="{id:1}">Product</a></code>
@@ -109,7 +110,22 @@ In app.router.module file<br>
   } </code><br>
   
   <h2> Redirect Router</h2>
+  <p> when user input one url, you can redirect to other url</p>
+  <h4> Default Homepage</h4>
+  In app.router.module file:<br>
+  <code>
+  const routes: Routes = [ <br>
+
+  { path : 'product/:id', component: ProductComponent},<br>
+  {path: ' ' , redirectTo: '/home', pathMatch: 'full'},<br>
+  {path : 'Home', component : HomeComponent},<br>
+  {path : '**', component: Code404Component},<br>
+];<br>
+  </code>
   
+  
+  
+ 
   
  
    
