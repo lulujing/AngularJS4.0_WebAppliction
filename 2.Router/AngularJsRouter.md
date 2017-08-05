@@ -97,16 +97,20 @@ In app.router.module file<br>
  <code>   ngOnInit() {
     this.productId = this.routeInfo.snapshot.params['id'];
   } </code><br>
-  <i>3.snapshot and subscribe</i>
-  In product component ts :
+  <i>3.snapshot and subscribe</i><br>
+  In product component ts :<br>
   <code> toProductDetail( ) {
     this.router.navigate(['/product',2]);
   } </code><br>
  The  problem is when you want to rurn to other product page from one product page, the Id donot changes <br>
- solve: In product.component.ts<br>
+ Solve: In product.component.ts<br>
  <code> ngOnInit() {
     this.routeInfo.params.subscribe((params: Params) => this.productId = params['id']);
-  } </code>
+  } </code><br>
+  
+  <h2> Redirect Router</h2>
+  
+  
  
    
  
