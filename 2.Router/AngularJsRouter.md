@@ -11,7 +11,7 @@ a small project to show how to configure rounter.
                             <li>RouterLink</li>
                              <li>ActivatedRouter</li>
                         </ul>
-<h2>Created project called <i> rounter</i> and components</h2>
+<h2>Created project called <i> rounter</i> and components  <a href="https://github.com/lulujing/AngularJS4.0_WebAppliction/tree/master/2.Router/Example1"> Example 1</a></h2>
  1. Created project
 <code>ng new router --routing </code>
 <i>--routing</i> means AngularJs will generate Approuter.module file for this project and import it in
@@ -58,5 +58,5 @@ In app.component file, defining the method"toProductDetail( )" like <br>
   toProductDetail( ) { <br>
     this.router.navigate(['/product']);<br>
   } </code><br>
-  <a href="#">All code can be seen in example 1</a>
+
 
