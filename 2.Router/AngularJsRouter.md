@@ -58,16 +58,62 @@ In app.component file, defining the method"toProductDetail( )" like <br>
   toProductDetail( ) { <br>
     this.router.navigate(['/product']);<br>
   } </code><br>
-  <h2> Passing Parameters </h2> <a href="#">Example 2</a>
+  <h2> Passing Parameters <a href="#">Example 2</a></h2> 
   There are three way to pass parameters incuding :
-  <ul>
-  <li> Url path <code> /product?id=1&name=2 => ActivedRoute.queryParams[id]
-  </li>
-  <li> Router path <code> {path:/product/:id} => /product/1  => ActivedRoute.queryParams[id]</code>
-  </li> 
-   <li> Router configuration <code> {path:/product, component:ProductComponent,data[{isProd:true}]} => ActivedRoute.data[0][isProd]</code>
-  </li>
-  </ul>
+ <ul>
+ <li> qurryparam <code> /product?id=1&name=2 => ActivedRoute.queryParams[id]
+ </li>
+ <li> Router path <code> {path:/product/:id} => /product/1  => ActivedRoute.queryParams[id]</code>
+ </li> 
+ <li> Router configuration <code> {path:/product, component:ProductComponent,data[{isProd:true}]} => ActivedRoute.data[0][isProd]</code>
+ </li>
+ </ul>
+ <i>1.routerLink</i>
+ Wrote code in app.component.html
+ <code><a [routerLink]="['/product']" [querryParams]="{id:1}">Product</a></code>
+ recieved params<br>
+ In App.Product<br>
+ <code> export class HomeComponent implements OnInit {<br>
+
+  private  productId: number;<br>
+  constructor(private routeInfo: ActivatedRoute) { }<br>
+
+  ngOnInit() { <br>
+  this.productId = this.routeInfo.snapshot.queryParams['id'];}<br></code>
   
+  For view:<br>
+  <code><p>
+  The information of product, Id is {{productId}}
+</p> </code><br>
+<i>Url path</i>
+In app.router.module file<br>
+<code>const routes: Routes = [<br>
+
+  { path : 'product/:id', component: ProductComponent}]</code><br>
+  
+ In app.component.html<br>
+ <code><a [routerLink]="['/product',1]" >Product</a> </code><br>
+ In product.component.ts<br>
+ <code>   ngOnInit() {
+    this.productId = this.routeInfo.snapshot.params['id'];
+  } </code><br>
+  <i>3.snapshot and subscribe</i>
+  In product component ts :
+  <code> toProductDetail( ) {
+    this.router.navigate(['/product',2]);
+  } </code><br>
+ The  problem is when you want to rurn to other product page from one product page, the Id donot changes <br>
+ solve: In product.component.ts<br>
+ <code> ngOnInit() {
+    this.routeInfo.params.subscribe((params: Params) => this.productId = params['id']);
+  } </code>
+ 
+   
+ 
+ 
+ 
+ 
+ 
+
 
 
