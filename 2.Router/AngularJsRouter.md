@@ -88,6 +88,7 @@ In app.component file, defining the method"toProductDetail( )" like <br>
 </p> </code><br>
 <i>Url path</i>
 In app.router.module file<br>
+
 <code>const routes: Routes = [<br>
 
   { path : 'product/:id', component: ProductComponent}]</code><br>
@@ -124,6 +125,52 @@ In app.router.module file<br>
   </code>
   
   
+<h2>Children Router <a href="#">Example 3</a></h2>
+
+<p>Rule:</p>
+<code>{path:'home',component:HomeComponent,
+  children:[
+    {
+
+       path:'',component:XxxComponent}
+   }
+   {
+       path:'/yyy' component:YyyComponent
+
+}]}</code>
+
+<p>Create two Component ProductDesc sellerInfo</p>
+<code>ng g component prodectDesc </code>
+<code>ng g component sellerInfo </code>
+<p>change seller component:</P>
+seller component ts:
+<code>< export class SellerInfoComponent implements OnInit {</code>
+  <code>private sellerId: number;</code>
+
+ <code> constructor(private routeInfo: ActivatedRoute) { }</code>
+
+ <code> ngOnInit() {</code>
+ <code> this.sellerId = this.routeInfo.snapshot.params['id'] }</code>
+
+<p>In seller.component.ts file:</p>
+<code>&lt;p&lt;</code>
+  <code>sellerId is {{sellerId}}</code>
+<code>&lt;/p&lt;</code>
+Change router Information
+In app.router.module file:
+<code>const routes: Routes = </code>
+<code>  { path : 'product/:id', component: ProductComponent, children: [</code>
+ <code>   {path: '' , component: ProductDescComponent},</code>
+<code>    {path: 'seller/:id', component: SellerInfoComponent} ]},</code>
+ <code> {path: '' , redirectTo: '/Home', pathMatch: 'full'},</code>
+ <code> {path : 'Home', component : HomeComponent},</code>
+<code>  {path : '**', component: Code404Component},];</code>
+<p>In product.component.html</p>
+<code>&lt;p&gt;The information of product, Id is {{productId}}&lt;/p&gt;</code>
+<code>&lt;a [routerLink]="['./']"&gt;product describe&lt;/a&gt;;</code>
+<code>&lt;a [routerLink]="['./seller',99]"&gt;sellerInfo&lt;/a&gt;</code>
+<code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code>
+
   
  
   
