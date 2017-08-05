@@ -1,0 +1,5 @@
+<a [routerLink]="['/Home']">Home</a>
+<a [routerLink]="['/product',1]" >Product</a>
+<input type="button" value="productInfo" (click)="toProductDetail( )">
+<router-outlet></router-outlet>
+<router-outlet name="aux"></router-outlet>
