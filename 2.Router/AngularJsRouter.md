@@ -30,23 +30,23 @@ imports: [
 <code> ng g component Code404</code>
 
 <h2>Crated navigation by configuring Router</h2>
-1.<i> Routers</i>
+<i>1. Routers</i><br>
 Wrote all router paths and components in Approuter.module files<br>
 <code> 
 const routes: Routes = [ { path : 'product', component: ProductComponent},
                          { path : '', component : HomeComponent },
                          {path : '**', component: Code404Component},];</code><br>
 The ** path in the last route is a wildcard. The router will select this route if the requested URL doesn't match any paths for routes defined earlier in the configuration. This is useful for displaying a "404 - Not Found" page.<br>
-2.<i>routeroutlet</i><br>
+<i>2.routeroutlet</i><br>
 The loction of displaying component will be decided by the position of routeroutlet<br>
-3.<i>routerLink<i><br>
+<i>3.routerLink<i><br>
 Wrote navigation by routerLink <br>
 In app.component.html file: <br>
 <code>&lt;a [routerLink]="['/']"&gt;Home&lt;/a&gt;</code>
 <code>&lt;a [routerLink]="['/product']">Product&lt;/a&gt;</code>
   </code><br>
-4.<i>Router</i><br>
-another way to make navigation by method of router <br>
+<i>4.Router</i><br>
+Another way to make navigation by method of router <br>
 In app.component.html file,add new button  <br>
 <code><input type="button" value="productInfo" (click)="toProductDetail( )"></code>
 In app.component file, defining the method"toProductDetail( )" like <br>
@@ -58,5 +58,16 @@ In app.component file, defining the method"toProductDetail( )" like <br>
   toProductDetail( ) { <br>
     this.router.navigate(['/product']);<br>
   } </code><br>
+  <h2> Passing Parameters </h2> <a href="#">Example 2</a>
+  There are three way to pass parameters incuding :
+  <ul>
+  <li> Url path <code> /product?id=1&name=2 => ActivedRoute.queryParams[id]
+  </li>
+  <li> Router path <code> {path:/product/:id} => /product/1  => ActivedRoute.queryParams[id]</code>
+  </li> 
+   <li> Router configuration <code> {path:/product, component:ProductComponent,data[{isProd:true}]} => ActivedRoute.data[0][isProd]</code>
+  </li>
+  </ul>
+  
 
 
