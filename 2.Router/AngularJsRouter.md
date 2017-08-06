@@ -366,7 +366,7 @@ export  class  Product {
 }
 
 ```
-<h4>2.confirm</h4>
+<h4>3.confirm</h4>
 Crated other file call unsaved.guard.ts in guard fold
 
 import {ActivatedRoute, ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot} from '@angular/router';
