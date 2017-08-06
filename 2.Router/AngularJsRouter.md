@@ -199,7 +199,8 @@ In app.router.module file:
   background-color: green;<br>
   height:100px;<br>
   width: 30%;<br>
-  float:left;<br>
+
+float:left;<br>
   box-sizing: border-box;<br>
 }</code>
 
@@ -247,6 +248,159 @@ Add information into Routers in app.router.module file
 &lt;router-outlet>&lt;/router-outlet> <br>
 &lt;router-outlet name="aux">&lt;/router-outlet> <br>
 </code>
+<h2>Router Guard <a href="https://github.com/lulujing/AngularJS4.0_WebAppliction/tree/master/2.Router/Example5">Example 5</h2>
+<ul>
+<li>CanActivate</li>
+<li>CanDeactivate</li>
+<li>Resolve</li>
+</ul>
+<h4>1.Sign in</h4>
+<p>Created the fold called <i>guard</i> and file called <i>login.guard.ts </i></p>
+<code>import {CanActivate} from '@angular/router';<br>
+import {isUndefined} from 'util';<br>
+
+export class  LoginGuard implements CanActivate {<br>
+  canActivate() {<br>
+    const loggedIn: boolean = Math.random() < 0.5;<br>
+    if (!loggedIn) {<br>
+      console.log('log in successed');<br>
+    }<br>
+    return loggedIn;<br>
+    }}</code>
+    <p>Add router Guard to the router path</p>
+    <p>In app.router.module file:</p>
+    <p><code>const routes: Routes = [
+  { path : 'product/:id', component: ProductComponent, children: [
+    {path: '' , component: ProductDescComponent},
+    {path: 'seller/:id', component: SellerInfoComponent}], canActivate: [LoginGuard]},
+  { path: 'chat', component: ChatComponent, outlet : 'aux'},
+  {path: '' , redirectTo: '/Home', pathMatch: 'full'},
+  {path : 'Home', component : HomeComponent},
+  {path : '**', component: Code404Component},
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: [LoginGuard]
+  })</code></p>
+<h4>2. Information check</h4>
+<p>Create class Product in product.component.ts</p>
+<code>export  class  Product {
+
+  constructor(public  id: number , public  name: string) {
+  }
+  }</code>
+
+<p>Create New file called <i>product.resovle</i></p>
+<code>
+import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
+import {Product} from '../product/product.component';
+import {Observable} from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+
+@Injectable( )
+export class ProductResolve implements Resolve<Product> {
+  constructor(private router: Router) {}
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Product | Observable<Product> | Promise<Product> {
+    const productId: number = route.params['id'];
+    if (productId === 1) {
+      return new Product(1, 'iphone8');
+    } else {
+      this.router.navigate(['/Home']);
+      return undefined;
+    }
+  }
+
+}</code>
+
+<p>Configure Router</p>
+<p>In app.route.module file:</p>
+```csharp
+const routes: Routes = [
+  { path : 'product/:id', component: ProductComponent, children: [
+    {path: '' , component: ProductDescComponent},
+    {path: 'seller/:id', component: SellerInfoComponent}], canActivate: [LoginGuard], canDeactivate : [UnsavedGuard],
+    resolve: { Product : ProductResolve }},
+  { path: 'chat', component: ChatComponent, outlet : 'aux'},
+  {path: '' , redirectTo: '/Home', pathMatch: 'full'},
+  {path : 'Home', component : HomeComponent},
+  {path : '**', component: Code404Component},
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: [LoginGuard, UnsavedGuard , ProductResolve ]
+})
+```
+
+<p>change product.component.ts file:</p>
+```csharp
+@Component({
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.css']
+})
+export class ProductComponent implements OnInit {
+
+  private  productId: number;
+  private productName: string;
+  constructor(private routeInfo: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.routeInfo.params.subscribe((params: Params) => this.productId = params['id']);
+    this.routeInfo.data.subscribe( (data: { product: Product}) => {
+      this.productId = data.product.id;
+      this.productName = data.product.name;
+    });
+  }
+
+}
+
+export  class  Product {
+
+  constructor(public  id: number , public  name: string) {
+  }
+}
+
+```
+<h4>2.confirm</h4>
+Crated other file call unsaved.guard.ts in guard fold
+
+import {ActivatedRoute, ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot} from '@angular/router';
+import {ProductComponent} from '../product/product.component';
+import {Observable} from 'rxjs/Observable';
+
+export class UnsavedGuard implements CanDeactivate<ProductComponent> {
+
+  canDeactivate(component: ProductComponent) {
+    return window.confirm('Are you sure you want to leave?');
+  }
+}
+
+Configuring Router
+In app.router.module file:
+
+
+const routes: Routes = [
+  { path : 'product/:id', component: ProductComponent, children: [
+    {path: '' , component: ProductDescComponent},
+    {path: 'seller/:id', component: SellerInfoComponent}], canActivate: [LoginGuard], canDeactivate : [UnsavedGuard]},
+  { path: 'chat', component: ChatComponent, outlet : 'aux'},
+  {path: '' , redirectTo: '/Home', pathMatch: 'full'},
+  {path : 'Home', component : HomeComponent},
+  {path : '**', component: Code404Component},
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: [LoginGuard, UnsavedGuard ]
+})
+
+
 
   
  
