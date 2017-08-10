@@ -1,0 +1,32 @@
+<p>
+  bind works!
+</p>
+<button (click)="doOnClick($event)">click me </button>
+
+<img [src]="imgUrl"/>
+<img src="{{imgUrl}}"/>
+<input value="TOm" (input)="doOnInput($event)">
+<button disabled>clickme</button>
+<table>
+  <tr><td [attr.colspan]="size">website</td></tr>
+</table>
+
+<div [class]="divClass">class1</div>
+
+<div class="a b" [class.c]="isBig ">class2</div>
+
+<div [ngClass]="divClass">Many Class</div>
+<div [style.color]="isDev?'red':'blue'">style</div>
+<div [style.font-size.em]="isDev?3:1">font-size</div>
+<div [ngStyle]="divStyle">ngStyle</div>
+
+<hr/>
+<input (input)="doOnInputB($event)" >
+<input [value]="nameA">
+
+<input [value]="name" (input)="doOnInputA($event)">
+<p>{{name}}</p>
+
+<p>pipe</p>
+<p>my birthday {{birthday| date | uppercase }}</p>
+<p>try my pipe {{size | multiple:'3'}}</p>
