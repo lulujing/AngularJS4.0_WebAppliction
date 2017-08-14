@@ -1,0 +1,14 @@
+<h1>
+  I am parent component
+</h1>
+<!--<div>
+  <input type="text" placeholder="put stock code" [(ngModel)]="stock">
+  <app-order [stockCode]="stock" [amount]="100"></app-order>
+</div>-->
+<!--<app-price-quote (lastPrice)="priceQuoteHander( $event)"></app-price-quote>
+<div>
+  this is out price-quote component  stockcode:{{priceQuote.stockCode}}
+  price{{priceQuote.lastPrice}}
+</div> -->
+<app-price-quote (buy)="buyHandle($event)"></app-price-quote>
+<app-order [priceQuote]="priceQutoe" ></app-order>
