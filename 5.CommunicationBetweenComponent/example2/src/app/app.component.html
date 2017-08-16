@@ -1,0 +1,15 @@
+<div class="parent">
+  <h2>father Component</h2>
+  <div>
+    greeting <input type="text" [(ngModel)]="greeting">
+  </div>
+  <div>
+    <input type="text" [(ngModel)]="user.name">
+  </div>
+  <app-child [greeting]="greeting" [user]="user"></app-child>
+</div>
+
+<hr/>
+<app-child2 #child21></app-child2>
+<app-child2 #child22></app-child2>
+<button (click)="child22.greeting('Tom2')">aa</button>
