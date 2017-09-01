@@ -1,0 +1,16 @@
+<form #myForm="ngForm" (ngSubmit)="OnSubmit(myForm.value,myForm.valid)" novalidate>
+
+    <div>User:<input type="text" ngModel name="userName" required minlength="6" (input)="onMobileInput(myForm)" > </div>
+  <div [hidden]="mobileValid|| mobileUntounched">
+  <div [hidden]="!myForm.form.hasError('required','username')">
+    no username
+  </div>
+  </div>
+    <div>PhoneNumber:<input  ngModel type="text" name="mobile" appMobileValidator> </div>
+<div ngModelGroup="passwordsGrounp">
+  <div>Password:<input type="password" ngModel name="password" appEqualValidator></div>
+  <div>Password Comfirm <input type="password" name="pconfirm"></div>
+</div>
+  <button type="submit">Submit</button>
+</form>
+

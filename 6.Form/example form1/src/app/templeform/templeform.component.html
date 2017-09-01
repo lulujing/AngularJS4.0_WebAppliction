@@ -1,0 +1,11 @@
+<form action="/regist" method="post" #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">
+  <div>User:<input type="text" required pattern="[a-zA-Z0-9]"> </div>
+  <div>PhoneNumber:<input type="text"> </div>
+  <div>Code:<input type="number" min="10000" max="999999"></div>
+  <div>Password:<input type="password"></div>
+  <div>Password Comfirm <input type="password"></div>
+  <button type="submit">Submit</button>
+</form>
+<div>
+  {{myForm.value | json}}
+</div>

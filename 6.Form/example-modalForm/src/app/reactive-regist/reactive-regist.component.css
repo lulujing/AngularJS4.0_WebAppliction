@@ -1,0 +1,6 @@
+.ng-invalid{
+  color: red;
+}
+.hasError{
+  color:yellow;
+}

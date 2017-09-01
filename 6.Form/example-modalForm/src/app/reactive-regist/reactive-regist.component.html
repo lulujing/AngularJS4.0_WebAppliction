@@ -1,0 +1,35 @@
+<form  [formGroup]="formModel" (submit)="onSubmit()">
+    <div>User:<input type="text" formControlName="username" [class.hasError]="formModel.get('username').valid|| formModel.get('username').untouched"> </div>
+  <div [hidden]="formModel.get('username').valid|| formModel.get('username').untouched">
+   <div [hidden]="!formModel.hasError('required','username')">
+     no username
+   </div>
+  <div [hidden]="!formModel.hasError('minlength','username')">
+    minlength is 6
+  </div>
+  </div>
+  <div [hidden]="formModel.get('mobile').valid|| formModel.get('mobile').pristine">
+    <div>PhoneNumber:<input  type="text"  formControlName="mobile"> </div>
+  <div [hidden]="!formModel.hasError('mobile','mobile')">
+    input right phone number
+  </div>
+  </div>
+  <div [hidden]="formModel.get('mobile').pending">
+  <div formGroupName="passwordsGroup">
+
+    <div>Password:<input type="password" formControlName="password"></div>
+    <div [hidden]="!formModel.hasError('minlength',['passwordGroup','passsword'])">
+      minlength is 6
+    </div>
+    <div>Password Comfirm <input type="password" formControlName="pconfirm"></div>
+    <div [hidden]="!formModel.hasError('equal','passwordsGroup')">
+
+      {{formModel.getError('equal','passwordsGroup')?.desc }}
+    </div>
+  </div>
+  </div>
+    <button type="submit">Submit</button>
+</form>
+<div>
+  {{formModel.status}}
+</div>
